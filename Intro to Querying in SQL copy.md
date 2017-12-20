@@ -11,7 +11,9 @@ A language for interacting with data stored in relational databases
 
 ## Terminology
 Relational databases are a collection of tables
+
 A row is a "record" and a column is a "field"
+
 A query is a request for data from a database table or combination of tables
 
 ##   SELECT statements
