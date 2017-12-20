@@ -5,7 +5,7 @@ date: "12/6/2017"
 output: html_document
 ---
 
-#SQL Notes
+*SQL Notes
 SQL --> "Structured Query Language"
 A language for interacting with data stored in relational databases
 
