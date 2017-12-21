@@ -1,12 +1,4 @@
-``` r
-library(DBI)
-```
-
     ## Warning: package 'DBI' was built under R version 3.3.2
-
-``` r
-db <- dbConnect(RSQLite::SQLite(), dbname = "sql.sqlite")
-```
 
 SQL Notes
 =========

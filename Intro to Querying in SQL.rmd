@@ -7,7 +7,7 @@ output:
     variant: markdown_github
 ---
 
-```{r}
+```{r, echo = F}
 library(DBI)
 db <- dbConnect(RSQLite::SQLite(), dbname = "sql.sqlite")
 ```
