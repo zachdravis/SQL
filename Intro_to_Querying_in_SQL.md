@@ -1,5 +1,3 @@
-    ## Warning: package 'DBI' was built under R version 3.3.2
-
 SQL Notes
 =========
 
