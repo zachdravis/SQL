@@ -92,7 +92,13 @@ Filtering results
 -----------------
 
 The WHERE keyword allows you to filter based on text and numeric values in a table.
-Comparison operators: 1. = equal 2. &lt;&gt; not equal 3. &lt; less than 4. &gt; greater than 5. &lt;= less than or equal to 6. &gt;= greater than or equal to.
+Comparison operators:
+1. = equal
+2. &lt;&gt; not equal
+3. &lt; less than
+4. &gt; greater than
+5. &lt;= less than or equal to
+6. &gt;= greater than or equal to.
 
 ``` sql
 SELECT MyColumnName1 FROM MyTableName WHERE MyColumnName1 = x;
