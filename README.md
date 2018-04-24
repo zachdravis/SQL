@@ -1,6 +1,7 @@
 # SQL
-<<<<<<< HEAD
+
 This is a collection of notes on SQL
 =======
 As I learn more and more about SQL, I'll add useful guides to this repository.
->>>>>>> 1719b5bc0359a70916f5a4876d54d732bf02f98a
+
+For those interested in a book format, I recommend the Language of SQL by Larry Rockoff: https://www.amazon.com/Language-SQL-Access-Relational-Databases/dp/143545751X
