@@ -1,0 +1,89 @@
+---
+title: "Using R and SQL Together"
+output:
+  md_document:
+    variant: markdown_github
+---
+#RMySQL
+It's a common task for any data scientist to need to access data already stored in a SQL database.  This guide will show you how to access a MySQL database using the R package RMySQL.
+
+##Download the package
+```{r}
+library(RMySQL)
+```
+Remember, if you don't already have RMySQL installed on your machine your code will be:
+```{r, eval = F}
+install.packages("RMySQL")
+```
+
+##Connecting to a database
+You can set your password as a variable name and then change the code chunk settings (include=FALSE inside of the brackets at the top of the chunk) so that it won't appear when the R Markdown document knits.
+```{r}
+mypw <- "mysqlpassword"
+```
+
+Using the data base I created using the MySQL Workbench on my personal machine, I'll illustrate an example of how to connect via R.
+```{r}
+MoviesDB <- dbConnect(MySQL(),
+                      user='root',
+                      password=mypw,
+                      dbname='Movie Ratings',
+                      host='localhost')
+```
+The dbConnect() function takes information on the database I'm connecting to and then creates an object (MoviesDB) that is a MySQL connection.  We can then reference that connection in future functions.
+
+##Navigating a Database
+One such function is the dbListTables() function, which lists all tables in a database.
+```{r}
+dbListTables(MoviesDB)
+```
+In this rudimentary example, I only created two tables.  However, a database may store hundreds of tables.  The output of dbListTables is a vector of character strings that can then be searched using a function like grep(), which returns a specified pattern match from a string.
+
+##Pulling Data into R
+Once you've selected the table(s) you want to access, a nifty function dbGetQuery() allows you to write the syntax of your MySQL command within R.
+```{r}
+MoviesTable <- dbGetQuery(MoviesDB, "SELECT * FROM Movies")
+```
+Now, we have an R data frame called MoviesTable that has all of the information from the Movies table in SQL.
+
+###Using dbGetQuery is helpful for two reasons:
+
+1. It can be used to learn more about the data before pulling it in using R instead of SQL (useful if you aren't yet SQL savvy).
+
+For example, consider a large table from which you only wanted to pull in certain variables.  You can explore these data using the names() function in R.
+```{r}
+names(dbGetQuery(MoviesDB, "SELECT * FROM Movies"))
+```
+
+Similarly, you could look at the unique values of a given column.
+```{r}
+unique(dbGetQuery(MoviesDB, "SELECT ReviewerName FROM Movies"))
+```
+
+2. Renaming variables can be easier.
+Using SQL syntax makes renaming variables easier because it is done simultaneously with bringing the data into R.  To do this, we'll include the AS statement in our SQL query.
+```{r}
+MoviesTable <- dbGetQuery(MoviesDB, "
+                          SELECT
+                          ReviewerName AS Name,
+                          StarWarsIXRev AS StarWarsReview1to5
+                          FROM Movies")
+```
+Now our data frame is imported with the names of these columns in the way that we specified.  This is a helpful way to standardize naming conventions if pulling from different databases that have stored their data in non-uniform ways.
+
+There is an alternative to dbGetQuery(), which is the dbReadTable() function.  This function simply imports the table into an R data frame and is the equivalent of having a SELECT * FROM MyTable query in the dbGetQuery() function.
+```{r}
+MoviesTable <- dbReadTable(MoviesDB, 'Movies')
+```
+
+##Disconnecting from databases
+It's important to close connections to databases for a few reasons, but for one, if you keep re-running your code and establishing new connections over and over again, you'll eventually max out and your code will stop.  The function dbDisconnect() is used to close out of a specified database.
+```{r}
+dbDisconnect(MoviesDB)
+```
+
+If you have multiple connections, you can close them all at once usng the following code:
+```{r}
+lapply(dbListConnections(dbDriver(drv = "MySQL")), dbDisconnect)
+```
+
