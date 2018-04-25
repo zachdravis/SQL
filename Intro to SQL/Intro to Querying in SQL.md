@@ -1,10 +1,10 @@
-SQL Notes
+SQL Querying Guide
 =========
 
 SQL --&gt; "Structured Query Language."
 SQL is a language for interacting with data stored in relational databases.
 
-Part One: Working within a Table
+Querying Within a Table
 ================================
 
 Terminology
