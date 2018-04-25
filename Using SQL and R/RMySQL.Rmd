@@ -1,8 +1,6 @@
 ---
 title: "Using R and SQL Together"
-output:
-  md_document:
-    variant: markdown_github
+output: html_document
 ---
 #RMySQL
 It's a common task for any data scientist to need to access data already stored in a SQL database.  This guide will show you how to access a MySQL database using the R package RMySQL.
