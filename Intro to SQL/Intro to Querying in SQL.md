@@ -1,7 +1,7 @@
 SQL Notes
 =========
 
-SQL --&gt; "Structured Query Language"
+SQL --&gt; "Structured Query Language."
 SQL is a language for interacting with data stored in relational databases.
 
 Part One: Working within a Table
